@@ -66,9 +66,20 @@ async function get(suffix, params, retry = true) {
 
 function createEdge(obj) {
   return {
-    'items': obj.items,
-    'paging': obj,
+    items: obj.items,
+    paging: obj,
   }
+}
+
+function objToList(obj) {
+  const list = [];
+
+  Object.entries(obj).forEach(entry => list.push({
+    key: entry[0],
+    value: entry[1]
+  }));
+
+  return list;
 }
 
 const resolvers = {
@@ -154,6 +165,20 @@ const resolvers = {
       const params = {...args};
       return get(`/albums/${parent.id}/tracks`, params).then(createEdge);
     },
+
+    async external_ids(parent, args, context, info) {
+      return objToList(parent.external_ids);
+    },
+
+    async external_urls(parent, args, context, info) {
+      return objToList(parent.external_urls);
+    },
+  },
+
+  SimplifiedAlbum: {
+    async external_urls(parent, args, context, info) {
+      return objToList(parent.external_urls);
+    },
   },
 
   Artist: {
@@ -170,12 +195,28 @@ const resolvers = {
     async related_artists(parent, args, context, info) {
       return get(`/artists/${parent.id}/related-artists`, {}).then(obj => obj.artists);
     },
+
+    async external_urls(parent, args, context, info) {
+      return objToList(parent.external_urls);
+    },
+  },
+
+  SimplifiedArtist: {
+    async external_urls(parent, args, context, info) {
+      return objToList(parent.external_urls);
+    },
   },
 
   Category: {
     async playlists(parent, args, context, info) {
       const params = {...args};
       return get(`/browse/categories/${parent.id}/playlists`, params).then(createEdge);
+    },
+  },
+
+  Context: {
+    async external_urls(parent, args, context, info) {
+      return objToList(parent.external_urls);
     },
   },
 
@@ -194,12 +235,15 @@ const resolvers = {
       params.ids = params.ids.join(',');
       return get(`/playlist/${parent.id}/followers/contains`, params);
     },
+
+    async external_urls(parent, args, context, info) {
+      return objToList(parent.external_urls);
+    },
   },
 
-  PublicUser: {
-    async playlists(parent, args, context, info) {
-      const params = {...args};
-      return get(`/users/${parent.id}/playlists`, params).then(createEdge);
+  SimplifiedPlaylist: {
+    async external_urls(parent, args, context, info) {
+      return objToList(parent.external_urls);
     },
   },
 
@@ -210,6 +254,43 @@ const resolvers = {
 
     async audio_features(parent, args, context, info) {
       return audioFeatureLoader.load(parent.id);
+    },
+
+    async external_ids(parent, args, context, info) {
+      return objToList(parent.external_ids);
+    },
+
+    async external_urls(parent, args, context, info) {
+      return objToList(parent.external_urls);
+    },
+  },
+
+  SimplifiedTrack: {
+    async external_urls(parent, args, context, info) {
+      return objToList(parent.external_urls);
+    },
+  },
+
+  TrackLink: {
+    async external_urls(parent, args, context, info) {
+      return objToList(parent.external_urls);
+    },
+  },
+
+  PrivateUser: {
+    async external_urls(parent, args, context, info) {
+      return objToList(parent.external_urls);
+    },
+  },
+
+  PublicUser: {
+    async playlists(parent, args, context, info) {
+      const params = {...args};
+      return get(`/users/${parent.id}/playlists`, params).then(createEdge);
+    },
+
+    async external_urls(parent, args, context, info) {
+      return objToList(parent.external_urls);
     },
   },
 
@@ -261,6 +342,3 @@ authorize(CLIENT_ID, CLIENT_SECRET).then(data => {
     console.log(`🚀 Server ready at ${url}!`);
   });
 });
-
-
-
