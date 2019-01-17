@@ -1,0 +1,27 @@
+{
+  "name": "spotify-graphql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bobbyluig/spotify-graphql.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bobbyluig/spotify-graphql/issues"
+  },
+  "homepage": "https://github.com/bobbyluig/spotify-graphql#readme",
+  "dependencies": {
+    "apollo-server": "^2.3.1",
+    "dataloader": "^1.4.0",
+    "graphql": "^14.1.0",
+    "node-fetch": "^2.3.0"
+  }
+}
