@@ -210,7 +210,9 @@ const resolvers = {
   Category: {
     async playlists(parent, args, context, info) {
       const params = {...args};
-      return get(`/browse/categories/${parent.id}/playlists`, params).then(createEdge);
+      return get(`/browse/categories/${parent.id}/playlists`, params)
+        .then(obj => obj.playlists)
+        .then(createEdge);
     },
   },
 
