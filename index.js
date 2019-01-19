@@ -229,13 +229,13 @@ const resolvers = {
       }
 
       const params = {...args};
-      return get(`/playlist/${parent.id}/tracks`, params).then(createEdge);
+      return get(`/playlists/${parent.id}/tracks`, params).then(createEdge);
     },
 
     async contains_followers(parent, args, context, info) {
       const params = {...args};
       params.ids = params.ids.join(',');
-      return get(`/playlist/${parent.id}/followers/contains`, params);
+      return get(`/playlists/${parent.id}/followers/contains`, params);
     },
 
     async external_urls(parent, args, context, info) {
