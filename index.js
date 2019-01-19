@@ -296,18 +296,12 @@ const resolvers = {
     },
   },
 
-  SearchResult: {
+  PlaylistTrackItem: {
     __resolveType(obj, context, info) {
-      if (obj.type === 'album') {
-        return 'AlbumEdge';
-      } else if (obj.type === 'artist') {
-        return 'SimplifiedArtistEdge'
-      } else if (obj.type === 'playlist') {
-        return 'SimplifiedPlaylistEdge'
-      } else if (obj.type === 'track') {
-        return 'TrackEdge'
+      if (obj.is_local) {
+        return 'LocalPlaylistTrack';
       } else {
-        return null;
+        return 'PlaylistTrack';
       }
     }
   },
