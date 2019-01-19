@@ -229,7 +229,12 @@ const resolvers = {
       }
 
       const params = {...args};
-      return get(`/playlists/${parent.id}/tracks`, params).then(createEdge);
+      return get(`/playlists/${parent.id}/tracks`, params)
+        .then(createEdge)
+        .then(obj => {
+          obj.items = obj.items.filter(track => !track.is_local);
+          return obj;
+        });
     },
 
     async contains_followers(parent, args, context, info) {
