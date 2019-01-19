@@ -952,7 +952,7 @@ type Track {
   """
   Part of the response when [Track Relinking](https://developer.spotify.com/documentation/general/guides/track-relinking-guide/) is applied, and the requested track has been replaced with different track. The track in the `linked_from` object contains information about the originally requested track.
   """
-  linked_from: TrackLink!
+  linked_from: LinkedTrack
 
   """
   Part of the response when [Track Relinking](https://developer.spotify.com/documentation/general/guides/track-relinking-guide/) is applied, the original track is not available in the given market, and Spotify did not have any tracks to relink it with. The track response will still contain metadata for the original track, and a restrictions object containing the reason why the track is not available: `"restrictions" : {"reason" : "market"}`
@@ -1056,7 +1056,7 @@ type SimplifiedTrack {
   """
   Part of the response when [Track Relinking](https://developer.spotify.com/documentation/general/guides/track-relinking-guide/) is applied and is only part of the response if the track linking, in fact, exists. The requested track has been replaced with a different track. The track in the `linked_from` object contains information about the originally requested track.
   """
-  linked_from: Track!
+  linked_from: LinkedTrack
 
   """
   Part of the response when [Track Relinking](https://developer.spotify.com/documentation/general/guides/track-relinking-guide/) is applied, the original track is not available in the given market, and Spotify did not have any tracks to relink it with. The track response will still contain metadata for the original track, and a restrictions object containing the reason why the track is not available: `"restrictions" : {"reason" : "market"}`
@@ -1094,7 +1094,7 @@ type SimplifiedTrack {
   is_local: Boolean!
 }
 
-type TrackLink {
+type LinkedTrack {
   """
   Known external URLs for this track.
   """
