@@ -296,7 +296,7 @@ const resolvers = {
     },
   },
 
-  PlaylistTrackItem: {
+  PlaylistItem: {
     __resolveType(obj, context, info) {
       if (obj.is_local) {
         return 'LocalPlaylistTrack';
