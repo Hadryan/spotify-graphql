@@ -715,7 +715,7 @@ type Playlist {
     An [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) or the string `from_token`. Provide this parameter if you want to apply [Track Relinking](https://developer.spotify.com/documentation/general/guides/track-relinking-guide/).
     """
     market: String,
-  ): TrackEdge!
+  ): PlaylistTrackEdge!
 
   """
   The object type: “playlist”
@@ -1688,6 +1688,19 @@ type TrackEdge {
   """
   paging: Paging!
 }
+
+type PlaylistTrackEdge {
+  """
+  The requested data.
+  """
+  items: [PlaylistTrack!]!
+
+  """
+  The paging object associated with the edge.
+  """
+  paging: Paging!
+}
+
 
 type SimplifiedTrackEdge {
   """
