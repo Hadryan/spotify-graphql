@@ -64,7 +64,7 @@ async function get(suffix, params, retry = true) {
   });
 }
 
-function createEdge(obj) {
+function createConnection(obj) {
   return {
     items: obj.items,
     paging: obj,
@@ -120,7 +120,7 @@ const resolvers = {
     async search(parent, args, context, info) {
       const params = {...args};
       return get(`/search`, params).then(obj => {
-        Object.entries(obj).forEach(entry => obj[entry[0]] = createEdge(entry[1]));
+        Object.entries(obj).forEach(entry => obj[entry[0]] = createConnection(entry[1]));
         return obj;
       });
     },
@@ -142,17 +142,17 @@ const resolvers = {
 
     async categories(parent, args, context, info) {
       const params = {...args};
-      return get(`/browse/categories`, params).then(obj => createEdge(obj.categories));
+      return get(`/browse/categories`, params).then(obj => createConnection(obj.categories));
     },
 
     async featured_playlists(parent, args, context, info) {
       const params = {...args};
-      return get(`/browse/featured-playlists`, params).then(obj => createEdge(obj.playlists));
+      return get(`/browse/featured-playlists`, params).then(obj => createConnection(obj.playlists));
     },
 
     async new_releases(parent, args, context, info) {
       const params = {...args};
-      return get(`/browse/new-releases`, params).then(obj => createEdge(obj.albums));
+      return get(`/browse/new-releases`, params).then(obj => createConnection(obj.albums));
     },
   },
 
@@ -163,7 +163,7 @@ const resolvers = {
       }
 
       const params = {...args};
-      return get(`/albums/${parent.id}/tracks`, params).then(createEdge);
+      return get(`/albums/${parent.id}/tracks`, params).then(createConnection);
     },
 
     async external_ids(parent, args, context, info) {
@@ -184,7 +184,7 @@ const resolvers = {
   Artist: {
     async albums(parent, args, context, info) {
       const params = {...args};
-      return get(`/artists/${parent.id}/albums`, params).then(createEdge);
+      return get(`/artists/${parent.id}/albums`, params).then(createConnection);
     },
 
     async top_tracks(parent, args, context, info) {
@@ -212,7 +212,7 @@ const resolvers = {
       const params = {...args};
       return get(`/browse/categories/${parent.id}/playlists`, params)
         .then(obj => obj.playlists)
-        .then(createEdge);
+        .then(createConnection);
     },
   },
 
@@ -229,7 +229,7 @@ const resolvers = {
       }
 
       const params = {...args};
-      return get(`/playlists/${parent.id}/tracks`, params).then(createEdge);
+      return get(`/playlists/${parent.id}/tracks`, params).then(createConnection);
     },
 
     async contains_followers(parent, args, context, info) {
@@ -288,7 +288,7 @@ const resolvers = {
   PublicUser: {
     async playlists(parent, args, context, info) {
       const params = {...args};
-      return get(`/users/${parent.id}/playlists`, params).then(createEdge);
+      return get(`/users/${parent.id}/playlists`, params).then(createConnection);
     },
 
     async external_urls(parent, args, context, info) {

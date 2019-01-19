@@ -97,7 +97,7 @@ type Album {
     An [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) or the string `from_token`. Provide this parameter if you want to apply [Track Relinking](https://developer.spotify.com/documentation/general/guides/track-relinking-guide/).
     """
     market: String,
-  ): SimplifiedTrackEdge!
+  ): SimplifiedTrackConnection!
 
   """
   The [Spotify URI](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the album.
@@ -248,7 +248,7 @@ type Artist {
     The index of the first album to return. Default: 0 (i.e., the first album). Use with `limit` to get the next set of albums.
     """
     offset: Int = 0,
-  ): SimplifiedAlbumEdge!
+  ): SimplifiedAlbumConnection!
 
   """
   The Spotify catalog information about this artist’s top tracks by country.
@@ -426,7 +426,7 @@ type Category {
     The index of the first item to return. Default: 0 (the first object). Use with `limit` to get the next set of items.
     """
     offset: Int = 0,
-  ): SimplifiedPlaylistEdge!
+  ): SimplifiedPlaylistConnection!
 }
 
 type Context {
@@ -704,7 +704,7 @@ type Playlist {
     An [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) or the string `from_token`. Provide this parameter if you want to apply [Track Relinking](https://developer.spotify.com/documentation/general/guides/track-relinking-guide/).
     """
     market: String,
-  ): PlaylistItemEdge!
+  ): PlaylistItemConnection!
 
   """
   The [Spotify URI](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the playlist.
@@ -1240,7 +1240,7 @@ type PublicUser {
     The index of the first playlist to return. Default: 0 (the first object). Maximum offset: 100.000. Use with `limit` to get the next set of playlists.
     """
     offset: Int = 0,
-  ): SimplifiedPlaylistEdge!
+  ): SimplifiedPlaylistConnection!
 }
 
 type AudioAnalysis {
@@ -1489,7 +1489,7 @@ type Query {
     The index of the first item to return. Default: 0 (the first object). Use with `limit` to get the next set of categories.
     """
     offset: Int = 0,
-  ): CategoryEdge!
+  ): CategoryConnection!
 
   """
   Get a single category used to tag items in Spotify (on, for example, the Spotify player’s “Browse” tab).
@@ -1631,7 +1631,7 @@ type Query {
     The index of the first item to return. Default: 0 (the first object). Use with `limit` to get the next set of items.
     """
     offset: Int = 0,
-  ): SimplifiedPlaylistEdge!
+  ): SimplifiedPlaylistConnection!
 
   """
   Get a list of new album releases featured in Spotify (shown, for example, on a Spotify player’s “Browse” tab).
@@ -1651,112 +1651,112 @@ type Query {
     The index of the first item to return. Default: 0 (the first object). Use with `limit` to get the next set of items.
     """
     offset: Int = 0,
-  ): SimplifiedAlbumEdge!
+  ): SimplifiedAlbumConnection!
 }
 
 type SearchResult {
   """
   The albums associated with the search.
   """
-  albums: SimplifiedAlbumEdge,
+  albums: SimplifiedAlbumConnection,
 
   """
   The artists assosciated with the search.
   """
-  artists: ArtistEdge,
+  artists: ArtistConnection,
 
   """
   The playlists associated with the search.
   """
-  playlists: SimplifiedPlaylistEdge,
+  playlists: SimplifiedPlaylistConnection,
 
   """
   The tracks associated with the search.
   """
-  tracks: TrackEdge,
+  tracks: TrackConnection,
 }
 
-type TrackEdge {
+type TrackConnection {
   """
   The requested data.
   """
   items: [Track!]!
 
   """
-  The paging object associated with the edge.
+  The paging object associated with the Connection.
   """
   paging: Paging!
 }
 
-type PlaylistItemEdge {
+type PlaylistItemConnection {
   """
   The requested data.
   """
   items: [PlaylistItem!]!
 
   """
-  The paging object associated with the edge.
+  The paging object associated with the Connection.
   """
   paging: Paging!
 }
 
 
-type SimplifiedTrackEdge {
+type SimplifiedTrackConnection {
   """
   The requested data.
   """
   items: [SimplifiedTrack!]!
 
   """
-  The paging object associated with the edge.
+  The paging object associated with the Connection.
   """
   paging: Paging!
 }
 
-type SimplifiedAlbumEdge {
+type SimplifiedAlbumConnection {
   """
   The requested data.
   """
   items: [SimplifiedAlbum!]!
 
   """
-  The paging object associated with the edge.
+  The paging object associated with the Connection.
   """
   paging: Paging!
 }
 
-type SimplifiedPlaylistEdge {
+type SimplifiedPlaylistConnection {
   """
   The requested data.
   """
   items: [SimplifiedPlaylist!]!
 
   """
-  The paging object associated with the edge.
+  The paging object associated with the Connection.
   """
   paging: Paging!
 }
 
-type ArtistEdge {
+type ArtistConnection {
   """
   The requested data.
   """
   items: [Artist!]!
 
   """
-  The paging object associated with the edge.
+  The paging object associated with the Connection.
   """
   paging: Paging!
 }
 
-type CategoryEdge {
+type CategoryConnection {
   """
   The requested data.
   """
   items: [Category!]!
 
   """
-  The paging object associated with the edge.
+  The paging object associated with the Connection.
   """
   paging: Paging!
 }
