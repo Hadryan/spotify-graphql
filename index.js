@@ -273,7 +273,7 @@ const resolvers = {
     },
   },
 
-  TrackLink: {
+  LinkedTrack: {
     async external_urls(parent, args, context, info) {
       return objToList(parent.external_urls);
     },
